@@ -1,8 +1,12 @@
 import React from 'react'
+import Link from 'next/link'
 import 'isomorphic-fetch'
 
 const Home = ({ musics }) => (
   <div>
+    <Link href="/blog">
+      <a>Blog</a>
+    </Link>
     { musics.map(music => (
       <div key={ "mBox_"+music.id }>
         <h2 key={ "mId_"+music.id }>{ music.title }</h2>
@@ -17,7 +21,8 @@ const Home = ({ musics }) => (
 Home.getInitialProps = async () => {
   const musicsResponse = await fetch('https://jsonplaceholder.typicode.com/photos')
   const musics = await musicsResponse.json()
-
+  
+  console.log('This will be executed by the browser if this page has already been loaded.')
   return { musics }
 }
 
